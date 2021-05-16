@@ -1,0 +1,5 @@
+src/fonts/IosevkaMedium18.c
+src/fonts/TerminusTTFMedium12.c
+src/fonts/UbuntuCondensedRegular15.c
+src/fonts/UbuntuCondensedRegular32.c
+src/fonts/WeatherIconsRegular30.c

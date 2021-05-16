@@ -1,0 +1,19 @@
+menu "Display Graphics"
+
+    config DGX_ENABLE_SPI
+        bool "Enable the SPI interface displays."
+        help
+            This enables the SPI interface displays.
+
+    config DGX_ENABLE_SPI_ST7735
+        bool "Enable the SPI TFT displays on ST7735 chip."
+        depends on DGX_ENABLE_SPI
+        help
+            This enables the SPI TFT displays on ST7735 chip.
+
+    config DGX_ENABLE_I2C
+        bool "Enable the I2C interface displays."
+        help
+            This enables the I2C interface displays.
+
+endmenu

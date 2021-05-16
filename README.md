@@ -26,3 +26,19 @@ not so usual geometric primitives like bit-masked circles.
 * cJSON
 * WiFi
 * SNTP
+
+## What the project does?
+
+1. It draws backround using bit-masked lines
+2. Starts to get IP from WiFi router
+3. Starts SNTP time synchronization
+3. Draws clockface and clock hands over background
+4. Determines it's location using [ip-api.com](http://ip-api.com/json) service
+5. Sets its timezone according to determined location
+6. Obtains current weather for determined location and draws it over background but under clock hands
+7. Draws clock hands every second
+8. Periodically refreshes location and weather
+
+## What does it look like
+
+[video](https://github.com/jef-sure/dgx_clock/video_2021-05-16_16-08-26.mp4)

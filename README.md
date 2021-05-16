@@ -41,4 +41,4 @@ not so usual geometric primitives like bit-masked circles.
 
 ## What does it look like
 
-![video](https://github.com/jef-sure/dgx_clock/video_2021-05-16_16-08-26.gif)
+![video](https://github.com/jef-sure/dgx_clock/blob/main/video_2021-05-16_16-08-26.gif)

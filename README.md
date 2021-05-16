@@ -1,6 +1,6 @@
 # This is my test project to learn ESP32
 
-## Archivements
+## Achivements
 
 ### How to program TFT SPI displays
 
@@ -20,7 +20,7 @@ not so usual geometric primitives like bit-masked circles.
 
 * SPI
 * I2C
-* DMA
+* DMAS
 * Heap memory classes
 * HTTP client
 * cJSON

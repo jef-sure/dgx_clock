@@ -1,6 +1,7 @@
 #include "http_client_request.h"
 #include "esp_http_client.h"
 #include "esp_log.h"
+#include <sys/time.h>
 
 static const char *TAG = "http_client_request";
 
@@ -47,11 +48,17 @@ http_client_response_t* http_client_request_get(const char *url) {
             };
     esp_http_client_handle_t client = esp_http_client_init(&config);
     esp_err_t err;
-    while (1) {
+    struct timeval now;
+    gettimeofday(&now, 0);
+    uint64_t ustart = now.tv_sec * 1000 + now.tv_usec / 1000;
+    uint64_t unow = ustart;
+    while (unow < ustart + 5000) {
         err = esp_http_client_perform(client);
         if (err != ESP_ERR_HTTP_EAGAIN) {
             break;
         }
+        gettimeofday(&now, 0);
+        unow = now.tv_sec * 1000 + now.tv_usec / 1000;
     }
     esp_http_client_cleanup(client);
     if (err == ESP_OK) {

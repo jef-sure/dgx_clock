@@ -27,7 +27,7 @@ not so usual geometric primitives like bit-masked circles.
 * WiFi
 * SNTP
 
-## What the project does?
+## What does the project?
 
 1. It draws backround using bit-masked lines
 2. Starts to get IP from WiFi router

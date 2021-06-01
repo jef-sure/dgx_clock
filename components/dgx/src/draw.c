@@ -135,43 +135,41 @@ void dgx_draw_line_float(dgx_screen_t *scr, float xs, float ys, float xe, float 
         return;
     }
     if (dx > dy) {
-        if (x > x2) {
-            SWAP(x, x2);
-            SWAP(y, y2);
-            SWAP(xf, x2f);
-            SWAP(yf, y2f);
-        }
-        fixed_t sy = float2fixed((float) (y2f - yf) / (x2f - xf));
+        int16_t sx = x2 > x ? 1 : -1;
+        fixed_t sy = float2fixed((float) (y2f - yf) / (x2f > xf ? x2f - xf : xf - x2f));
         fixed_t y1fx = yf;
         int16_t x1 = x, y1 = y, sp = x;
-        do {
+        while (1) {
             y1fx += sy;
             int16_t yni = round_fixed(y1fx);
             if (yni != y1 || x1 == x2) {
-                scr->fast_hline(scr, sp, y1, x1 - sp + 1, color);
-                sp = x1 + 1;
+                int16_t ls = sx < 0 ? x1 : sp;
+                int16_t lw = sx < 0 ? sp - x1 + 1 : x1 - sp + 1;
+                scr->fast_hline(scr, ls, y1, lw, color);
+                sp = x1 + sx;
                 y1 = yni;
             }
-        } while (x1++ != x2);
-    } else {
-        if (y > y2) {
-            SWAP(x, x2);
-            SWAP(y, y2);
-            SWAP(xf, x2f);
-            SWAP(yf, y2f);
+            if (x1 == x2) break;
+            x1 += sx;
         }
-        fixed_t sx = float2fixed((float) (x2f - xf) / (y2f - yf));
+    } else {
+        int16_t sy = y2 > y ? 1 : -1;
+        fixed_t sx = float2fixed((float) (x2f - xf) / (y2f > yf ? y2f - yf : yf - y2f));
         fixed_t x1fx = xf;
         int16_t y1 = y, x1 = x, sp = y;
-        do {
+        while (1) {
             x1fx += sx;
             int16_t xni = round_fixed(x1fx);
             if (xni != x1 || y1 == y2) {
-                scr->fast_vline(scr, x1, sp, y1 - sp + 1, color);
-                sp = y1 + 1;
+                int16_t ls = sy < 0 ? y1 : sp;
+                int16_t lw = sy < 0 ? sp - y1 + 1 : y1 - sp + 1;
+                scr->fast_vline(scr, x1, ls, lw, color);
+                sp = y1 + sy;
                 x1 = xni;
             }
-        } while (y1++ != y2);
+            if (y1 == y2) break;
+            y1 += sy;
+        }
     }
     if (!--scr->in_progress) scr->update_screen(scr, x, y, x2, y2);
 }

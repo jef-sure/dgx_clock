@@ -53,7 +53,7 @@ not so usual geometric primitives like bit-masked circles.
    1. SCK - D18
    1. SDA - D23
    1. A0 - D2
-   1. Reset - D14
+   1. Reset - D27
    1. CS - D17
    1. GND - GND
    1. VCC - 5v
